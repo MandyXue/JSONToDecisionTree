@@ -26,16 +26,41 @@
   </head>
 
   <body>
+			<textarea rows="20" cols="100" id="jsontext">
+					{
+						"name":"input",
+						"children":[
+							{
+								"name":"test1",
+								"children":[{
+									"name":"result1"
+								}]
+							},
+							{
+								"name":"test2",
+								"children":[{
+									"name":"result2"
+								}]
+							}
+						]
+					}
+			</textarea>
+			<button onclick="submitJSON()">Submit</button>
+
+			
+
+
 <!-- load the d3.js library -->	
 <script src="http://d3js.org/d3.v3.min.js"></script>
 	
 <script>
 
 // ************** Generate the tree diagram	 *****************
+
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
 	width = window.screen.width - margin.right - margin.left,
 	height = window.screen.height - margin.top - margin.bottom;
-	
+
 var i = 0;
 
 var tree = d3.layout.tree()
@@ -47,23 +72,34 @@ var diagonal = d3.svg.diagonal()
 var svg = d3.select("body").append("svg")
 	.attr("width", width + margin.right + margin.left)
 	.attr("height", height + margin.top + margin.bottom)
-  .append("g")
+	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// load the external data
-// d3.json("jsonfile.json", function(error, treeData) {
-//   root = treeData[0];
-//   update(root);
-// });
-
-var text = [
-  {"name": "Root", "children": [{"name": "avgDuration <= 1909.4166666666665", "children": [{"name": "avgHourOfDay <= 10.512608603517695", "children": [{"name": "avgDuration <= 897.3333592333593", "children": [{"name": "medianDuration <= 548.0", "children": [{"name": "avgDuration <= 578.151185770751", "children": [{"name": "unloading"}]}, {"name": "avgDuration > 578.151185770751", "children": [{"name": "logistic"}]}]}, {"name": "medianDuration > 548.0", "children": [{"name": "avgDuration <= 646.5498484848486", "children": [{"name": "loading"}]}, {"name": "avgDuration > 646.5498484848486", "children": [{"name": "unloading"}]}]}]}, {"name": "avgDuration > 897.3333592333593", "children": [{"name": "stdLat <= 1.4264047780990718E-4", "children": [{"name": "avgDuration <= 1473.041935483871", "children": [{"name": "unloading"}]}, {"name": "avgDuration > 1473.041935483871", "children": [{"name": "loading"}]}]}, {"name": "stdLat > 1.4264047780990718E-4", "children": [{"name": "medianDuration <= 601.5", "children": [{"name": "logistic"}]}, {"name": "medianDuration > 601.5", "children": [{"name": "unloading"}]}]}]}]}, {"name": "avgHourOfDay > 10.512608603517695", "children": [{"name": "avgHourOfDay <= 13.556998939554614", "children": [{"name": "avgDuration <= 1363.3756213096708", "children": [{"name": "numberOfStops <= 14.5", "children": [{"name": "unloading"}]}, {"name": "numberOfStops > 14.5", "children": [{"name": "unloading"}]}]}, {"name": "avgDuration > 1363.3756213096708", "children": [{"name": "stdLat <= 1.1256084236578259E-4", "children": [{"name": "fueling"}]}, {"name": "stdLat > 1.1256084236578259E-4", "children": [{"name": "unloading"}]}]}]}, {"name": "avgHourOfDay > 13.556998939554614", "children": [{"name": "medianDuration <= 303.5", "children": [{"name": "medianHourOfDay <= 18.25", "children": [{"name": "unloading"}]}, {"name": "medianHourOfDay > 18.25", "children": [{"name": "transport"}]}]}, {"name": "medianDuration > 303.5", "children": [{"name": "numberOfStops <= 17.5", "children": [{"name": "transport"}]}, {"name": "numberOfStops > 17.5", "children": [{"name": "transport"}]}]}]}]}]}, {"name": "avgDuration > 1909.4166666666665", "children": [{"name": "avgDuration <= 22572.47206125828", "children": [{"name": "medianDuration <= 609.0", "children": [{"name": "avgDuration <= 8415.882035726323", "children": [{"name": "medianHourOfDay <= 10.75", "children": [{"name": "transport"}]}, {"name": "medianHourOfDay > 10.75", "children": [{"name": "logistic"}]}]}, {"name": "avgDuration > 8415.882035726323", "children": [{"name": "stdLong <= 2.480348441730809E-4", "children": [{"name": "parking"}]}, {"name": "stdLong > 2.480348441730809E-4", "children": [{"name": "transport"}]}]}]}, {"name": "medianDuration > 609.0", "children": [{"name": "medianHourOfDay <= 13.75", "children": [{"name": "stdLat <= 2.1464028996884445E-4", "children": [{"name": "transport"}]}, {"name": "stdLat > 2.1464028996884445E-4", "children": [{"name": "unloading"}]}]}, {"name": "medianHourOfDay > 13.75", "children": [{"name": "stdLat <= 4.2422416567416807E-5", "children": [{"name": "transport"}]}, {"name": "stdLat > 4.2422416567416807E-5", "children": [{"name": "transport"}]}]}]}]}, {"name": "avgDuration > 22572.47206125828", "children": [{"name": "stdLat <= 3.03309290626923E-4", "children": [{"name": "medianHourOfDay <= 11.75", "children": [{"name": "avgHourOfDay <= 11.925824175824175", "children": [{"name": "parking"}]}, {"name": "avgHourOfDay > 11.925824175824175", "children": [{"name": "unloading"}]}]}, {"name": "medianHourOfDay > 11.75", "children": [{"name": "medianDuration <= 1800.5", "children": [{"name": "unloading"}]}, {"name": "medianDuration > 1800.5", "children": [{"name": "transport"}]}]}]}, {"name": "stdLat > 3.03309290626923E-4", "children": [{"name": "workshop"}]}]}]}]}
+text = [
+	{
+		"name":"input",
+		"children":[
+			{
+				"name":"test1",
+				"children":[{
+					"name":"result1"
+				}]
+			},
+			{
+				"name":"test2",
+				"children":[{
+					"name":"result2"
+				}]
+			}
+		]
+	}
 ];
 root = text[0];
-console.log(root);
 update(root);
 
-function update(source) {
+function update(root) {
+
+	d3.select("g").selectAll("*").remove(); 
 
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse(),
@@ -107,6 +143,16 @@ function update(source) {
 }
 
 </script>
-	
+
+<script>
+	function submitJSON(){
+		var text = document.getElementById("jsontext").value;
+		// 	{"name": "Root", "children": [{"name": "avgDuration <= 1909.4166666666665", "children": [{"name": "avgHourOfDay <= 10.512608603517695", "children": [{"name": "avgDuration <= 897.3333592333593", "children": [{"name": "medianDuration <= 548.0", "children": [{"name": "avgDuration <= 578.151185770751", "children": [{"name": "unloading"}]}, {"name": "avgDuration > 578.151185770751", "children": [{"name": "logistic"}]}]}, {"name": "medianDuration > 548.0", "children": [{"name": "avgDuration <= 646.5498484848486", "children": [{"name": "loading"}]}, {"name": "avgDuration > 646.5498484848486", "children": [{"name": "unloading"}]}]}]}, {"name": "avgDuration > 897.3333592333593", "children": [{"name": "stdLat <= 1.4264047780990718E-4", "children": [{"name": "avgDuration <= 1473.041935483871", "children": [{"name": "unloading"}]}, {"name": "avgDuration > 1473.041935483871", "children": [{"name": "loading"}]}]}, {"name": "stdLat > 1.4264047780990718E-4", "children": [{"name": "medianDuration <= 601.5", "children": [{"name": "logistic"}]}, {"name": "medianDuration > 601.5", "children": [{"name": "unloading"}]}]}]}]}, {"name": "avgHourOfDay > 10.512608603517695", "children": [{"name": "avgHourOfDay <= 13.556998939554614", "children": [{"name": "avgDuration <= 1363.3756213096708", "children": [{"name": "numberOfStops <= 14.5", "children": [{"name": "unloading"}]}, {"name": "numberOfStops > 14.5", "children": [{"name": "unloading"}]}]}, {"name": "avgDuration > 1363.3756213096708", "children": [{"name": "stdLat <= 1.1256084236578259E-4", "children": [{"name": "fueling"}]}, {"name": "stdLat > 1.1256084236578259E-4", "children": [{"name": "unloading"}]}]}]}, {"name": "avgHourOfDay > 13.556998939554614", "children": [{"name": "medianDuration <= 303.5", "children": [{"name": "medianHourOfDay <= 18.25", "children": [{"name": "unloading"}]}, {"name": "medianHourOfDay > 18.25", "children": [{"name": "transport"}]}]}, {"name": "medianDuration > 303.5", "children": [{"name": "numberOfStops <= 17.5", "children": [{"name": "transport"}]}, {"name": "numberOfStops > 17.5", "children": [{"name": "transport"}]}]}]}]}]}, {"name": "avgDuration > 1909.4166666666665", "children": [{"name": "avgDuration <= 22572.47206125828", "children": [{"name": "medianDuration <= 609.0", "children": [{"name": "avgDuration <= 8415.882035726323", "children": [{"name": "medianHourOfDay <= 10.75", "children": [{"name": "transport"}]}, {"name": "medianHourOfDay > 10.75", "children": [{"name": "logistic"}]}]}, {"name": "avgDuration > 8415.882035726323", "children": [{"name": "stdLong <= 2.480348441730809E-4", "children": [{"name": "parking"}]}, {"name": "stdLong > 2.480348441730809E-4", "children": [{"name": "transport"}]}]}]}, {"name": "medianDuration > 609.0", "children": [{"name": "medianHourOfDay <= 13.75", "children": [{"name": "stdLat <= 2.1464028996884445E-4", "children": [{"name": "transport"}]}, {"name": "stdLat > 2.1464028996884445E-4", "children": [{"name": "unloading"}]}]}, {"name": "medianHourOfDay > 13.75", "children": [{"name": "stdLat <= 4.2422416567416807E-5", "children": [{"name": "transport"}]}, {"name": "stdLat > 4.2422416567416807E-5", "children": [{"name": "transport"}]}]}]}]}, {"name": "avgDuration > 22572.47206125828", "children": [{"name": "stdLat <= 3.03309290626923E-4", "children": [{"name": "medianHourOfDay <= 11.75", "children": [{"name": "avgHourOfDay <= 11.925824175824175", "children": [{"name": "parking"}]}, {"name": "avgHourOfDay > 11.925824175824175", "children": [{"name": "unloading"}]}]}, {"name": "medianHourOfDay > 11.75", "children": [{"name": "medianDuration <= 1800.5", "children": [{"name": "unloading"}]}, {"name": "medianDuration > 1800.5", "children": [{"name": "transport"}]}]}]}, {"name": "stdLat > 3.03309290626923E-4", "children": [{"name": "workshop"}]}]}]}]}
+		root = JSON.parse(text);
+		console.log(root);
+		update(root);
+	}
+</script>
+
   </body>
 </html>
